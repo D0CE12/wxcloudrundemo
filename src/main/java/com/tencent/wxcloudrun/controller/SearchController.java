@@ -17,7 +17,7 @@ public class SearchController {
 
     public SearchController(@Autowired SearchService searchService) { this.searchService = searchService; }
 
-    @GetMapping("/api/goods/{Gdes}")
+    @GetMapping("/api/goods/search/{Gdes}")
     public ApiResponse searchGoods(@PathVariable String Gdes) {
         Optional<ArrayList<Good>> goodsList = searchService.searchGoods(Gdes);
         if (goodsList.isPresent()) {
