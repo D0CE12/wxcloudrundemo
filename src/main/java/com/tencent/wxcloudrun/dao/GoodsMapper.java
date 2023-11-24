@@ -13,7 +13,7 @@ public interface GoodsMapper {
     @Select("select * from goods where GID = #{GID}")
     Good getGood(@Param("GID") int gid);
 
-    @Select("SELECT * FROM goods WHERE MATCH(Gdes) AGAINST (#{keyword} IN NATURAL LANGUAGE MODE)")
+    @Select("SELECT * FROM goods WHERE MATCH(Gdes) AGAINST (#{keyword} IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)")
     ArrayList<Good> getGoods(@Param("keyword") String keyword);
 
     @Select("select * from goods where Gcategory = #{Gcategory} and Status = 1")
