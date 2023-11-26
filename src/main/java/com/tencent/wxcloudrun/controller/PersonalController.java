@@ -44,6 +44,19 @@ public class PersonalController {
         }
     }
 
+    @GetMapping ("/api/personal/querybrowseByUid")
+    public ApiResponse querybrowseByUid(@RequestHeader("x-wx-openid") String uid){
+        logger.info("openid: " + uid);
+        try {
+            ArrayList<Operation> list = operationService.querybrowseByUid(uid);
+            logger.info(String.valueOf(list));
+            return ApiResponse.ok(list);
+        } catch (Exception e){
+            e.printStackTrace();
+            return ApiResponse.error("失败");
+        }
+    }
+
     @GetMapping("/api/personal/queryBuyByUid")
     public ApiResponse queryBuyByUid(@RequestHeader("x-wx-openid") String uid){
         List<Deal> list =  personalService.buyOrSell(uid, null);

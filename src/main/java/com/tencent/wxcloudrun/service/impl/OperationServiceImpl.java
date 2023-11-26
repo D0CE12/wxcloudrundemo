@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class OperationServiceImpl implements OperationService {
-    private final OperationMapper operationMapper;
+    final OperationMapper operationMapper;
 
     public OperationServiceImpl(@Autowired OperationMapper operationMapper) {
         this.operationMapper = operationMapper;
@@ -42,6 +42,15 @@ public class OperationServiceImpl implements OperationService {
     public ArrayList<Operation> queryCollectByUid(String userid) {
         try {
             ArrayList<Operation> operations = operationMapper.queryCollectByUid(userid);
+            return operations;
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Operation> querybrowseByUid(String userid) {
+        try {
+            ArrayList<Operation> operations = operationMapper.querybrowseByUid(userid);
             return operations;
         } catch (Exception e){
             throw new RuntimeException(e);

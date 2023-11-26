@@ -12,4 +12,6 @@ public interface OperationService {
 
     ArrayList<Operation> queryCollectByUid(String userid);
 
+    ArrayList<Operation> querybrowseByUid(String userid);
+
 }
