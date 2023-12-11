@@ -2,15 +2,18 @@ package com.tencent.wxcloudrun.service.impl;
 
 import com.tencent.wxcloudrun.dao.OperationMapper;
 import com.tencent.wxcloudrun.dto.OperationLog;
+import com.tencent.wxcloudrun.model.Operation;
 import com.tencent.wxcloudrun.service.OperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OperationServiceImpl implements OperationService {
-    private final OperationMapper operationMapper;
+    final OperationMapper operationMapper;
 
     public OperationServiceImpl(@Autowired OperationMapper operationMapper) {
         this.operationMapper = operationMapper;
@@ -33,5 +36,24 @@ public class OperationServiceImpl implements OperationService {
         }
 
         return 1;
+    }
+
+    @Override
+    public ArrayList<Operation> queryCollectByUid(String userid) {
+        try {
+            ArrayList<Operation> operations = operationMapper.queryCollectByUid(userid);
+            return operations;
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Operation> querybrowseByUid(String userid) {
+        try {
+            ArrayList<Operation> operations = operationMapper.querybrowseByUid(userid);
+            return operations;
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 }

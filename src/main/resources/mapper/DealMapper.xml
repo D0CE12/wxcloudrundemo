@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.DealMapper">
+
+    <resultMap id="map" type="com.tencent.wxcloudrun.model.Deal">
+        <id property="id" column="id"/>
+        <result property="goodID" column="goodID"/>
+        <result property="gdes" column="gdes"/>
+        <result property="gprice" column="gprice"/>
+        <result property="buyerID" column="buyerID"/>
+        <result property="sellerID" column="sellerID"/>
+        <result property="iurl" column="iurl"/>
+    </resultMap>
+
+    <select id="buyOrSell" resultMap="map">
+        SELECT
+            t.did AS id,
+            t1.Gdes,
+            t1.Gprice,
+            t12.I_URL as iurl,
+            t.buyerID,
+            t.sellerID
+        FROM
+            deal t,
+            goods t1,
+            goods_image t12
+        WHERE
+            t.GID = t1.GID
+        AND t1.GID = t12.g_id
+        <if test="buyerId == null and sellerId != null">
+            AND t.SellerID = #{sellerId}
+        </if>
+        <if test="buyerId != null and sellerId == null">
+            AND t.BuyerID = #{buyerId}
+        </if>
+    </select>
+
+
+</mapper>
