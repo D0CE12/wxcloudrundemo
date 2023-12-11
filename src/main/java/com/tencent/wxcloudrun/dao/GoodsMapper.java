@@ -13,7 +13,7 @@ public interface GoodsMapper {
     @Select("select * from goods where GID = #{GID}")
     Good getGood(@Param("GID") int gid);
 
-    @Select("SELECT * FROM goods WHERE MATCH(Gdes) AGAINST (#{keyword} IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)")
+    @Select("SELECT * FROM goods WHERE MATCH(Gdes) AGAINST (#{keyword} IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION) AND Status = 1")
     ArrayList<Good> getGoods(@Param("keyword") String keyword);
 
     @Select("select * from goods where Gcategory = #{Gcategory} and Status = 1")
@@ -31,4 +31,28 @@ public interface GoodsMapper {
 
     @Insert("insert into errand (GID, deadline) values (#{GID}, #{deadline})")
     void insertErrand(Errand errand);
+
+    @Select("select * from goods where UID = #{uid} and Status = 1")
+    ArrayList<Good> getSomeonesSellingGoods(@Param("uid") String uid);
+
+    @Select("select * from goods_image where g_id = #{g_id} and i_order=1")
+    ArrayList<GoodsImage> getFirstImage(@Param("g_id") int gid);
+
+    @Update("update goods set Gdes = #{Gdes}, Gprice = #{Gprice}, Gcampus = #{Gcampus}, Gupdatetime = NOW(), Status = #{Status}, Gcategory = #{Gcategory} where GID = #{GID}")
+    void modifyGood(Good good);
+
+    @Update("update errand set deadline = #{deadline} where gid = #{GID}")
+    void modifyErrand(Errand good);
+
+    //set end time
+    @Update("update ${category} set endtime = NOW() where gid = #{GID}")
+    void endGood(@Param("category") String category, @Param("GID") Integer gid);
+
+    @Update("update goods set Status = 2 where gid = #{GID}")
+    void setGoodSold(@Param("GID") int gid);
+
+    @Select("select Gcategory from goods where gid = #{GID}")
+    int getCategory(@Param("GID") int gid);
 }
+
+

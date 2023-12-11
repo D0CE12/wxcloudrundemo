@@ -9,6 +9,7 @@ import com.tencent.wxcloudrun.dto.OperationLog;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
+
 @RestController
 public class OperationController {
 
@@ -28,4 +29,15 @@ public class OperationController {
             return ApiResponse.error("操作失败");
         }
     }
+    @GetMapping("/api/operation/wannabuy/{uid}/{gid}")
+    public ApiResponse wannaBuy(@PathVariable String uid,@PathVariable Integer gid){
+        int result = operationService.wannaBuy(uid,gid);
+        if(result == 1){
+            return ApiResponse.ok("操作成功");
+        }
+        else {
+            return ApiResponse.error("操作失败");
+        }
+    }
+
 }

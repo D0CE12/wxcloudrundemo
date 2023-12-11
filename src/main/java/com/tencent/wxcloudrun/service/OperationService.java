@@ -10,6 +10,8 @@ import java.util.List;
 public interface OperationService {
     int Operation(OperationLog operationLog);
 
+    int wannaBuy(String uid,Integer gid);
+
     ArrayList<Operation> queryCollectByUid(String userid);
 
     ArrayList<Operation> querybrowseByUid(String userid);
