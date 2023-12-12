@@ -35,7 +35,7 @@ public interface GoodsMapper {
     @Select("select * from goods where UID = #{uid} and Status = 1")
     ArrayList<Good> getSomeonesSellingGoods(@Param("uid") String uid);
 
-    @Select("select * from goods_image where g_id = #{g_id} and i_order=1")
+    @Select("select * from goods_image where g_id = #{g_id} and i_order=0")
     ArrayList<GoodsImage> getFirstImage(@Param("g_id") int gid);
 
     @Update("update goods set Gdes = #{Gdes}, Gprice = #{Gprice}, Gcampus = #{Gcampus}, Gupdatetime = NOW(), Status = #{Status}, Gcategory = #{Gcategory} where GID = #{GID}")
