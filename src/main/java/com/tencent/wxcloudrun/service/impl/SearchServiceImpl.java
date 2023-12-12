@@ -19,7 +19,7 @@ public class SearchServiceImpl implements SearchService {
         ArrayList<Good> goods;
         goods=goodsMapper.getGoods(keyword);
         goods.forEach((e)->{
-            e.setGoodsImageList(goodsMapper.getGoodImage(e.getGID()));
+            e.setGoodsImageList(goodsMapper.getFirstImage(e.getGID()));
         });
         return Optional.ofNullable(goods);
     }
