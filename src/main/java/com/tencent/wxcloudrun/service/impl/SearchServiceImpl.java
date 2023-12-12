@@ -16,6 +16,11 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public Optional<ArrayList<Good>> searchGoods(String keyword) {
-        return Optional.ofNullable(goodsMapper.getGoods(keyword));
+        ArrayList<Good> goods;
+        goods=goodsMapper.getGoods(keyword);
+        goods.forEach((e)->{
+            e.setGoodsImageList(goodsMapper.getGoodImage(e.getGID()));
+        });
+        return Optional.ofNullable(goods);
     }
 }
